@@ -1,2 +1,35 @@
 # cloudflare-drand-verifier
+
 A provably fair random number generation system using the Cloudflare Distributed Randomness Beacon powered by drand.
+
+---
+
+## 🌟 Overview
+
+`cloudflare-drand-verifier` is a serverless, single-page random number generation system. Every calculation is performed directly within each user's browser, ensuring that the generated results cannot be manipulated by anyone. It serves as a decentralized and provably fair randomness verification tool.
+
+The system combines the **Cloudflare Distributed Randomness Beacon** with the **drand** network. By locking in a future timestamp before the draw takes place, it ensures that no one can predict or manipulate the outcome before the randomness is generated.
+
+Once the draw concludes, a unique permalink is generated for that specific draw page. Anyone can recalculate and verify the results at any time using the computation report provided on the permalink page along with public drand data—ensuring complete transparency and immutability.
+
+**Learn more:**
+* **Cloudflare League of Entropy:** https://www.cloudflare.com/leagueofentropy/
+* **drand:** https://drand.love/
+
+---
+
+## 🛠️ How It Works
+
+1. **Draw Data Locking (Pre-commitment)**  
+   Before the draw begins, parameters such as the Draw ID, draw time, and total number of tickets are locked. Once set, these parameters cannot be altered in any way.
+
+2. **Future Round Locking**  
+   The system automatically calculates the drand round corresponding to the chosen draw time and enforces selecting the **next consecutive round**. Because this round has not yet been generated at the time of commitment, it is mathematically impossible for anyone to foresee the outcome.
+
+3. **Unbiased Rejection Sampling**  
+   After retrieving the SHA-256 hash of the drand round signature, the system uses an Unbiased Rejection Sampling algorithm to derive the winning numbers. This completely eliminates modulo bias inherent in traditional arithmetic, ensuring every single number has an identical probability of being selected.
+
+4. **Provable Fairness & Easy Verification**  
+   Once the draw concludes, a unique permalink is generated for that specific draw page. Anyone can recalculate and verify the results using the computation report on the permalink page alongside public drand data.
+
+   > 💡 **Quick Tip:** The simplest way to verify is to copy the entire computation report from the page and paste it into any AI tool (such as ChatGPT, Gemini, Grok, or DeepSeek) and ask it to recalculate and check the steps for you!
