@@ -1289,7 +1289,7 @@ function renderAllResults() {
 }
 
 function formatCountdown(milliseconds) {
-  let total = Math.max(0, Math.floor(milliseconds / 1000));
+  let total = Math.max(0, Math.ceil(milliseconds / 1000));
 
   const days = Math.floor(total / 86400);
   total %= 86400;
